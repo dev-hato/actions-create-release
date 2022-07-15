@@ -1,2 +1,2 @@
 # actions-create-release
-リリースを作成するGitHub Actions
+リリースを作成するGitHub Actionsです。

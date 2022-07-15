@@ -1,0 +1,73 @@
+---
+name: close-pr
+
+on:
+  pull_request:
+    types:
+      - closed
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  # PR close時にCIが出したPRをcloseする
+  close-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close PullRequest
+        uses: actions/github-script@v6.1.0
+        env:
+          HEAD_REF: ${{github.event.pull_request.head.ref}}
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const fs = require('fs')
+            const yaml = require('js-yaml')
+            
+            const HEAD_REF = process.env["HEAD_REF"]
+            const common_params = {
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            }
+            const workflow_dir_name = '.github/workflows/'
+            
+            for (const yml_file_name of fs.readdirSync(workflow_dir_name)) {
+              const yml_file = yaml.load(fs.readFileSync(workflow_dir_name + yml_file_name, 'utf8'))
+              const jobs = yml_file.jobs
+              for (const job_name of Object.keys(jobs)) {
+                for (const step of jobs[job_name].steps) {
+                  if (step.uses?.startsWith('dev-hato/actions-diff-pr-management')) {
+                    const head_name = step.with['branch-name-prefix'] + '-' + HEAD_REF
+                    let head = "${{github.event.pull_request.head.repo.owner.login}}:"
+                    head += head_name
+                    const pulls_list_params = {
+                      head,
+                      base: HEAD_REF,
+                      state: "open",
+                      ...common_params
+                    }
+                    console.log("call pulls.list:", pulls_list_params)
+                    const pulls = await github.paginate(github.rest.pulls.list,
+                                                        pulls_list_params)
+            
+                    for (const pull of pulls) {
+                      const pulls_update_params = {
+                        pull_number: pull.number,
+                        state: "closed",
+                        ...common_params
+                      }
+                      console.log("call pulls.update:", pulls_update_params)
+                      await github.rest.pulls.update(pulls_update_params)
+                      const git_deleteRef_params = {
+                        ref: "heads/" + head_name,
+                        ...common_params
+                      }
+                      console.log("call git.deleteRef:", git_deleteRef_params)
+                      await github.rest.git.deleteRef(git_deleteRef_params)
+                    }
+                  }
+                }
+              }
+            }

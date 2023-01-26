@@ -10,7 +10,7 @@ runs:
   steps:
     - name: Increment version
       id: increment_version
-      uses: actions/github-script@v6.3.3
+      uses: actions/github-script@v6.4.0
       env:
         SHA: ${{ github.sha }}
       with:
@@ -20,7 +20,7 @@ runs:
           const script = require('${{ github.action_path }}/scripts/action/increment_version.js')
           return await script({github, context})
     - name: Create release
-      uses: actions/github-script@v6.3.3
+      uses: actions/github-script@v6.4.0
       env:
         GITHUB_REF: ${{env.GITHUB_REF}}
         TAG_NAME: ${{ steps.increment_version.outputs.result }}

@@ -1,9 +1,9 @@
-name: 'create-release'
-author: 'dev-hato Development Team'
-description: 'リリースを作成する'
+name: "create-release"
+author: "dev-hato Development Team"
+description: "リリースを作成する"
 inputs:
   github-token: # id of input
-    description: 'GITHUB_TOKEN'
+    description: "GITHUB_TOKEN"
     required: true
 runs:
   using: "composite"

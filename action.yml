@@ -18,7 +18,7 @@ runs:
         result-encoding: string
         script: |
           const {script} = require('${{ github.action_path }}/dist/increment_version.js')
-          return await script({github, context})
+          return await script(github, context)
     - name: Create release
       uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
       env:
@@ -28,4 +28,4 @@ runs:
         github-token: ${{inputs.github-token}}
         script: |
           const {script} = require('${{ github.action_path }}/dist/create_release.js')
-          return await script({github, context})
+          return await script(github, context)

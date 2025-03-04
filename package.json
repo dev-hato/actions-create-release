@@ -1,9 +1,11 @@
 {
-  "devDependencies": {
+  "dependencies": {
     "@actions/github": "6.0.0",
     "@octokit/plugin-paginate-rest": "11.4.3",
     "@octokit/plugin-rest-endpoint-methods": "13.3.1",
-    "@octokit/request-error": "6.1.7",
+    "@octokit/request-error": "6.1.7"
+  },
+  "devDependencies": {
     "@proofdict/textlint-rule-proofdict": "3.1.2",
     "@textlint-ja/textlint-rule-no-insert-dropping-sa": "2.0.1",
     "esbuild": "0.25.0",
@@ -23,6 +25,9 @@
     "textlint-rule-terminology": "5.2.12",
     "tsc": "2.0.4",
     "typescript": "5.8.2"
+  },
+  "engines": {
+    "node": "22.14.0"
   },
   "standard": {
     "ignore": [

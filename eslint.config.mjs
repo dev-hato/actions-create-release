@@ -82,7 +82,7 @@ export default defineConfig([
   },
   {
     files: ["**/*.js", "**/*.mjs", "**/*.cjs", "**/*.jsx"],
-    extends: compat.extends("plugin:react/recommended"),
+    // extends: compat.extends("plugin:react/recommended"),
 
     languageOptions: {
       ecmaVersion: "latest",

@@ -102,7 +102,7 @@ export default defineConfig([
     extends: compat.extends(
       "plugin:@typescript-eslint/recommended",
       "plugin:n/recommended",
-      "plugin:react/recommended",
+      // "plugin:react/recommended",
       "prettier",
     ),
 

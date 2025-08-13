@@ -58,7 +58,7 @@ jobs:
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
-        uses: github/codeql-action/autobuild@df559355d593797519d70b90fc8edd5db049e7a2 # v3
+        uses: github/codeql-action/autobuild@df559355d593797519d70b90fc8edd5db049e7a2 # v3.29.9
       # - run: |
       #     echo "Run, Build Application using script"
       #     ./location_of_script_within_repo/buildscript.sh

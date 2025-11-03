@@ -3,7 +3,7 @@
     "@actions/github": "6.0.1",
     "@octokit/plugin-paginate-rest": "13.2.1",
     "@octokit/plugin-rest-endpoint-methods": "17.0.0",
-    "@octokit/request-error": "7.0.1"
+    "@octokit/request-error": "7.0.2"
   },
   "devDependencies": {
     "@proofdict/textlint-rule-proofdict": "3.1.2",

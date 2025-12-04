@@ -1,4 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>dev-hato/renovate-config"]
+  "extends": ["github>dev-hato/renovate-config"],
+  "ignoreDeps": [
+    "@octokit/plugin-paginate-rest",
+    "@octokit/plugin-rest-endpoint-methods"
+  ]
 }

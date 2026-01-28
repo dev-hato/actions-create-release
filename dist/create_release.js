@@ -23,14 +23,14 @@ __export(create_release_exports, {
   script: () => script
 });
 module.exports = __toCommonJS(create_release_exports);
-async function script(github, context) {
+async function script(github, ctx) {
   const tag_name = process.env.TAG_NAME;
   if (tag_name === void 0) {
     throw new Error("TAG_NAME must set.");
   }
   const createReleaseParams = {
-    owner: context.repo.owner,
-    repo: context.repo.repo,
+    owner: ctx.repo.owner,
+    repo: ctx.repo.repo,
     tag_name,
     target_commitish: process.env.GITHUB_REF,
     generate_release_notes: true

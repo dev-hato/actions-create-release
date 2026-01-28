@@ -1,12 +1,12 @@
+import type { context } from "@actions/github";
 import type { GitHub } from "@actions/github/lib/utils";
-import type { Context } from "@actions/github/lib/context";
 import type { PaginatingEndpoints } from "@octokit/plugin-paginate-rest";
 import type { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods";
 import { RequestError } from "@octokit/request-error";
 
 export async function script(
   github: InstanceType<typeof GitHub>,
-  context: Context,
+  ctx: typeof context,
 ): Promise<string> {
   const commit_sha = process.env.SHA;
 
@@ -19,8 +19,8 @@ export async function script(
   try {
     const getLatestReleaseParams: RestEndpointMethodTypes["repos"]["getLatestRelease"]["parameters"] =
       {
-        owner: context.repo.owner,
-        repo: context.repo.repo,
+        owner: ctx.repo.owner,
+        repo: ctx.repo.repo,
       };
     console.log("call repos.getLatestRelease:", getLatestReleaseParams);
     const latestRelease: RestEndpointMethodTypes["repos"]["getLatestRelease"]["response"] =
@@ -36,8 +36,8 @@ export async function script(
 
   const listPullRequestsAssociatedWithCommitParams: RestEndpointMethodTypes["repos"]["listPullRequestsAssociatedWithCommit"]["parameters"] =
     {
-      owner: context.repo.owner,
-      repo: context.repo.repo,
+      owner: ctx.repo.owner,
+      repo: ctx.repo.repo,
       commit_sha,
     };
   console.log(

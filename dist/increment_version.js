@@ -64,7 +64,7 @@ var RequestError = class extends Error {
 };
 
 // src/increment_version.ts
-async function script(github, context) {
+async function script(github, ctx) {
   const commit_sha = process.env.SHA;
   if (commit_sha === void 0) {
     throw new Error("SHA must set.");
@@ -72,8 +72,8 @@ async function script(github, context) {
   let latestReleaseVersion = "";
   try {
     const getLatestReleaseParams = {
-      owner: context.repo.owner,
-      repo: context.repo.repo
+      owner: ctx.repo.owner,
+      repo: ctx.repo.repo
     };
     console.log("call repos.getLatestRelease:", getLatestReleaseParams);
     const latestRelease = await github.rest.repos.getLatestRelease(getLatestReleaseParams);
@@ -86,8 +86,8 @@ async function script(github, context) {
     }
   }
   const listPullRequestsAssociatedWithCommitParams = {
-    owner: context.repo.owner,
-    repo: context.repo.repo,
+    owner: ctx.repo.owner,
+    repo: ctx.repo.repo,
     commit_sha
   };
   console.log(

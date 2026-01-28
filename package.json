@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@actions/github": "7.0.0",
+    "@actions/github": "9.0.0",
     "@octokit/plugin-paginate-rest": "13.2.1",
     "@octokit/plugin-rest-endpoint-methods": "16.0.0",
     "@octokit/request-error": "7.1.0"
@@ -28,9 +28,6 @@
   },
   "engines": {
     "node": "24.13.0"
-  },
-  "overrides": {
-    "undici": "^7.0.0"
   },
   "standard": {
     "ignore": [
